@@ -125,18 +125,18 @@ app.get("/news/:id", function (req, res) {
         });
 });
 
-app.post("/news/:id", function (res, req) {
+app.post("/news/:id", function (req,res) {
     console.log(req.params);
-    // db.Note.create(req.body)
-    //     .then(function (note) {
-    //         return db.News.findOneAndUpdate(
-    //             { "_id": req.params.id },
-    //             { $push: { "note": note._id } },
-    //             { new: true });
-    //     })
-    //     .then(function (data) {
-    //         res.json(data);
-    //     });
+    db.Note.create(req.body)
+        .then(function (note) {
+            return db.News.findOneAndUpdate(
+                { "_id": req.params.id },
+                { $push: { "note": note._id } },
+                { new: true });
+        })
+        .then(function (data) {
+            res.json(data);
+        });
 });
 
 app.listen(PORT, function () {

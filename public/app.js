@@ -20,8 +20,9 @@ $(document).on("click", "#addNote", function () {
     })
         .then(function (data) {
             $(".modal-title").text(data.title);
-            // console.log(data.note);
+            console.log(data);
             if (data.note) {
+                console.log("Lmao")
                 $("#bodyinput").val(data.note.body);
             }
         });
@@ -41,7 +42,6 @@ $(document).on("click", "#submitActivity", function () {
     }).then(function (data) {
         console.log("Hate You");
         location.reload();
-
     });
 
     // $("#titleinput").val("");

@@ -16,10 +16,10 @@ var NewSchema = new Schema({
         type: String,
         required: true
     },
-    note: [{
+    note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
-    }],
+    },
     description: {
         type: String,
         required: true
