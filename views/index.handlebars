@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-8  mx-auto">
+        <div class="jumbotron" style="padding: 30px">
+            <div class="container">
+                <h1 class="text-center">Anime News Scrape Project</h1>
+                <p class="text-center text-sm">Scrape and Mongoose of MyAnimeLists.net</p>
+                <hr>
+                <p class="text-center">
+                    <a class="btn btn-primary btn-md" href="/scrape" role="button">Scrape site</a>
+                    <a class="btn btn-primary btn-md" href="/api/news" role="button">API all News</a>
+                    <a class="btn btn-primary btn-md" href="/clear" role="button">Clear</a>
+                </p>
+                <p class="text-center" style="opacity: 0.4;">Wait a few second for its to scrape. If not shown, refresh
+                    the page</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    {{#each News}}
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-md-2">
+                <img src={{image}} class="card-img">
+            </div>
+            <div class="col-md-10">
+                <div class="card-header">
+                    <a href={{link}} class="thistitle">{{title}}</a>
+                    {{!-- <button class=" btn btn-primary saveNews" data-id={{_id}}>Save Post</button> --}}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idmodal"
+                        data-id={{_id}} id="addNote">Add Note </button>
+                </div>
+                <div class="card-body">
+                    <p>{{description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="modal fade" id="idmodal" tabindex="-1" role="dialog" aria-labelledby="addActivityModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" id="titleinput" name="title"></input>
+                    <textarea class="form-control" id="bodyinput" name="body"></textarea>
+                    <button type="button" class="btn btn-primary mt-4" data-id = {{_id}} id="submitActivity">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
