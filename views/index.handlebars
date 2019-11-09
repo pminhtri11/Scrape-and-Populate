@@ -7,6 +7,7 @@
                 <hr>
                 <p class="text-center">
                     <a class="btn btn-primary btn-md" href="/scrape" role="button">Scrape site</a>
+                    <a class="btn btn-primary btn-md" href="/saved" role="button">Saved News</a>
                     <a class="btn btn-primary btn-md" href="/api/news" role="button">API all News</a>
                     <a class="btn btn-primary btn-md" href="/clear" role="button">Clear</a>
                 </p>
@@ -28,7 +29,7 @@
             <div class="col-md-10">
                 <div class="card-header">
                     <a href={{link}} class="thistitle">{{title}}</a>
-                    {{!-- <button class=" btn btn-primary saveNews" data-id={{_id}}>Save Post</button> --}}
+                    <button class=" btn btn-primary saveNews" data-id={{_id}}>Save Post</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idmodal"
                         data-id={{_id}} id="addNote">Add Note </button>
                 </div>
@@ -48,7 +49,7 @@
                     <h5 class="modal-title"></h5>
                 </div>
                 <div class="modal-body">
-                    <input class="form-control" id="titleinput" name="title"></input>
+                    {{!-- <input class="form-control" id="titleinput" name="title"></input> --}}
                     <textarea class="form-control" id="bodyinput" name="body"></textarea>
                     <button type="button" class="btn btn-primary mt-4" data-id = {{_id}} id="submitActivity">Submit</button>
                 </div>

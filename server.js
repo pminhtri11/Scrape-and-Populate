@@ -52,7 +52,8 @@ app.get("/scrape", function (req, res) {
                 image: image,
                 title: title,
                 link: link,
-                description: description
+                description: description,
+                saved: false
             };
 
             db.News.create(result).then(function (data) {
@@ -84,15 +85,36 @@ app.get("/clear", function (req, res) {
     res.render("index");
 });
 
+//display saved article
+app.get("/saved", function (req, res) {
+    db.News.find({ "saved": true }).then(function (result) {
+        res.render("index", {
+            News: result
+        });
+    });
+});
+
+// Save Article
+app.post("/saved/:id", function (req, res) {
+    db.News.findOneAndUpdate({ "_id": req.params.id }, { "$set": { "saved": true } })
+        .then(function (result) {
+            res.json(result);
+        }).catch(function (err) {
+            res.json(err);
+        });
+});
+
 app.get("/api/news", function (req, res) {
     db.News.find({})
         .then(function (result) {
             res.send(result);
-        })
+        }).catch(function (err) {
+            res.json(err);
+        });
 });
 
 app.get("/news/:id", function (req, res) {
-    db.News.findOne({ _id: req.params.id })
+    db.News.findOne({ "_id": req.params.id })
         .populate("note")
         .then(function (note) {
             res.json(note);
@@ -103,20 +125,15 @@ app.get("/news/:id", function (req, res) {
 });
 
 app.post("/news/:id", function (res, req) {
-    console.log(req.body);
     db.Note.create(req.body)
         .then(function (note) {
-            console.log(note)
             return db.News.findOneAndUpdate(
-                { _id: req.params.id },
-                { $push: { note: note._id } },
+                { "_id": req.params.id },
+                { $push: { "note": note._id } },
                 { new: true });
         })
         .then(function (data) {
             res.json(data);
-        })
-        .catch(function (err) {
-            res.json(err);
         });
 });
 

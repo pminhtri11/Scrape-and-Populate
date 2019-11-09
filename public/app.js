@@ -1,3 +1,16 @@
+$(".saveNews").on("click", function () {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "POST",
+        url: "/saved/" + thisId
+    }).then(function (data) {
+        console.log(data);
+        location.reload();
+    });
+});
+
+
+// Add Note, see if any note already in this news
 $(document).on("click", "#addNote", function () {
     var thisId = $(this).attr("data-id");
     console.log(thisId);
@@ -5,28 +18,30 @@ $(document).on("click", "#addNote", function () {
         method: "GET",
         url: "/news/" + thisId
     })
-    .then(function (data){        
-        $(".modal-title").text(data.title);
-        // console.log(data.note);
-        if (data.note){
-            $("#titleinput").val(data.note.title);
-            $("#bodyinput").val(data.note.body);
-        }
-    });
+        .then(function (data) {
+            $(".modal-title").text(data.title);
+            // console.log(data.note);
+            if (data.note) {
+                $("#bodyinput").val(data.note.body);
+            }
+        });
 });
 
+
+// Save Note
 $(document).on("click", "#submitActivity", function () {
     var thisId = $(this).attr("data-id");
-    console.log(thisId);
+    // console.log(thisId);
     $.ajax({
         method: "POST",
         url: "/news/" + thisId,
         data: {
-            title: $("#titleinput").val(),
             body: $("#bodyinput").val()
         }
     }).then(function (data) {
-        console.log(data);
+        console.log("Hate You");
+        location.reload();
+
     });
 
     // $("#titleinput").val("");
