@@ -114,6 +114,7 @@ app.get("/api/news", function (req, res) {
 });
 
 app.get("/news/:id", function (req, res) {
+    // console.log(req.params.id)
     db.News.findOne({ "_id": req.params.id })
         .populate("note")
         .then(function (note) {
@@ -125,16 +126,17 @@ app.get("/news/:id", function (req, res) {
 });
 
 app.post("/news/:id", function (res, req) {
-    db.Note.create(req.body)
-        .then(function (note) {
-            return db.News.findOneAndUpdate(
-                { "_id": req.params.id },
-                { $push: { "note": note._id } },
-                { new: true });
-        })
-        .then(function (data) {
-            res.json(data);
-        });
+    console.log(req.params);
+    // db.Note.create(req.body)
+    //     .then(function (note) {
+    //         return db.News.findOneAndUpdate(
+    //             { "_id": req.params.id },
+    //             { $push: { "note": note._id } },
+    //             { new: true });
+    //     })
+    //     .then(function (data) {
+    //         res.json(data);
+    //     });
 });
 
 app.listen(PORT, function () {
