@@ -30,8 +30,13 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scapeHWdb", { useNewUrlParser: true });
-//------------------------------------------------------------------------------Routes------------------------------------------------------------------    
+// mongoose.connect("mongodb://localhost/scapeHWdb", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+// Connect to the Mongo DB
+mongoose.connect(MONGODB_URI);
+
+//-------------------------------------------------Routes-------------------------------------------------------    
 app.get("/", function (req, res) {
     res.render("index");
 })
@@ -125,7 +130,7 @@ app.get("/news/:id", function (req, res) {
         });
 });
 
-app.post("/news/:id", function (req,res) {
+app.post("/news/:id", function (req, res) {
     console.log(req.params);
     db.Note.create(req.body)
         .then(function (note) {
