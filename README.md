@@ -19,3 +19,5 @@ Scrape and Populate bring in scrape informations from MyAnimeLists.net, stores t
 6.  npm install mongoose
 
 Or "npm install" since all the package already listed in the package.json 
+
+# Deployed Site: https://floating-ravine-19532.herokuapp.com/
