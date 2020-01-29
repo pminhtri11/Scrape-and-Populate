@@ -17,4 +17,5 @@ Scrape and Populate bring in scrape informations from MyAnimeLists.net, stores t
 4.  npm install cheerio
 5.  npm install morgan
 6.  npm install mongoose
+
 Or "npm install" since all the package already listed in the package.json 
